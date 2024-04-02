@@ -38,7 +38,10 @@ export class CustomPlaylistExtractor extends BaseExtractor {
             ? query.split('playlist:')[1]
             : query;
 
-        const result = await this.db.playlist.findById(id);
+        const result = await this.db.playlist.findOne({
+            id,
+        });
+
         if (!result || result.author !== context.requestedBy?.id && result.private) {
             return this.createResponse();
         }
