@@ -17,7 +17,7 @@ export async function run({ interaction }: SlashCommandProps) {
   if (!timeline?.track) {
     const embed = EmbedGenerator.Error({
       title: 'Not playing',
-      description: 'I am not playing anything right now',
+      description: 'No track is playing right now',
     }).withAuthor(interaction.user);
 
     return interaction.editReply({ embeds: [embed] });
@@ -36,7 +36,7 @@ export async function run({ interaction }: SlashCommandProps) {
 
   const embed = EmbedGenerator.Success({
     title: 'Resumed',
-    description: 'I have successfully resumed the track.',
+    description: 'Successfully resumed the track.',
   }).withAuthor(interaction.user);
 
   return interaction.editReply({ embeds: [embed] });

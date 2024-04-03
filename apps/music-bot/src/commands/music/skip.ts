@@ -17,7 +17,7 @@ export async function run({ interaction }: SlashCommandProps) {
   if (!queue?.isPlaying()) {
     const embed = EmbedGenerator.Error({
       title: 'Not playing',
-      description: 'I am not playing anything right now',
+      description: 'No track is playing right now',
     }).withAuthor(interaction.user);
 
     return interaction.editReply({ embeds: [embed] });
@@ -27,7 +27,7 @@ export async function run({ interaction }: SlashCommandProps) {
 
   const embed = EmbedGenerator.Success({
     title: 'Track skipped!',
-    description: 'I have successfully skipped to the next track.',
+    description: 'Successfully skipped to the next track.',
   }).withAuthor(interaction.user);
 
   return interaction.editReply({ embeds: [embed] });

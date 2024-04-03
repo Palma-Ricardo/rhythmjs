@@ -17,7 +17,7 @@ export async function run({ interaction }: SlashCommandProps) {
   if (!queue) {
     const embed = EmbedGenerator.Error({
       title: 'Not playing',
-      description: 'I am not playing anything right now',
+      description: 'No track is playing right now',
     }).withAuthor(interaction.user);
 
     return interaction.editReply({ embeds: [embed] });
@@ -27,7 +27,7 @@ export async function run({ interaction }: SlashCommandProps) {
 
   const embed = EmbedGenerator.Success({
     title: 'Disconnected!',
-    description: 'I have successfully left the voice channel.',
+    description: 'Successfully left the voice channel.',
   }).withAuthor(interaction.user);
 
   return interaction.editReply({ embeds: [embed] });
