@@ -1,11 +1,9 @@
 import "dotenv/config";
 import "./bootstrap/database.js";
 import redis from "./bootstrap/redis.js";
-import "./bootstrap/web.js";
 import { client } from "./bootstrap/client.js";
 import { Player } from "discord-player";
 import { DiscordPlayerOptions } from "./utils/constants.js";
-import { registerPlayerEvents } from "./player/registerEvents.js";
 import { RedisQueryCache } from "./player/QueryCache.js";
 import { CustomPlaylistExtractor } from "./player/CustomPlaylistExtractor.js";
 
@@ -28,8 +26,6 @@ if (process.env.NODE_ENV !== "production") {
     console.log(`[${queue.guild.name}: ${queue.guild.id}] ${message}`),
   );
 }
-
-await registerPlayerEvents();
 
 await player.extractors.loadDefault((ext) => {
   return !DiscordPlayerOptions.disableSources.includes(ext);
