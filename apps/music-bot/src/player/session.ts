@@ -1,9 +1,9 @@
-import { Guild, User } from 'discord.js';
-import { randomBytes } from 'node:crypto';
-import ms from 'ms';
-import { useRedisAsync } from '#bot/hooks/useRedis';
+import { Guild, User } from "discord.js";
+import { randomBytes } from "node:crypto";
+import ms from "ms";
+import { useRedisAsync } from "#bot/hooks/useRedis";
 
-const generateToken = () => randomBytes(32).toString('hex');
+const generateToken = () => randomBytes(32).toString("hex");
 
 interface SessionData {
   id: string;
@@ -19,7 +19,7 @@ interface SessionData {
 export async function generateSession(
   user: User,
   guild: Guild,
-  timeout = '3h'
+  timeout = "3h",
 ): Promise<{ data: SessionData; token: string }> {
   const redis = await useRedisAsync();
   const mkey = `magic_link::${user.id}::${guild.id}`;
@@ -52,7 +52,7 @@ export async function generateSession(
 }
 
 export async function validateSession(
-  token: string
+  token: string,
 ): Promise<SessionData | null> {
   const redis = await useRedisAsync();
 

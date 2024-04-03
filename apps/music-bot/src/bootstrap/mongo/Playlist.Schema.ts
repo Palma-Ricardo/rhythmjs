@@ -1,5 +1,5 @@
-import { SerializedTrack } from 'discord-player';
-import { Schema, SchemaTypes, model } from 'mongoose';
+import { SerializedTrack } from "discord-player";
+import { Schema, SchemaTypes, model } from "mongoose";
 
 export interface IPlaylistSchema {
   id: string;
@@ -43,7 +43,7 @@ export const PlaylistSchema = new Schema<IPlaylistSchema>(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
-export const PlaylistModel = model<IPlaylistSchema>('Playlist', PlaylistSchema);
+export const PlaylistModel = model<IPlaylistSchema>("Playlist", PlaylistSchema);

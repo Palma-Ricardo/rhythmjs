@@ -1,7 +1,7 @@
-import { GuildQueue, GuildQueueEvent } from 'discord-player';
-import { PlayerEvent } from '../common/types.js';
-import { PlayerMetadata } from '../PlayerMetadata.js';
-import { useDatabase } from '#bot/hooks/useDatabase';
+import { GuildQueue, GuildQueueEvent } from "discord-player";
+import { PlayerEvent } from "../common/types.js";
+import { PlayerMetadata } from "../PlayerMetadata.js";
+import { useDatabase } from "#bot/hooks/useDatabase";
 
 export default class DSPUpdateEvent
   implements PlayerEvent<typeof GuildQueueEvent.dspUpdate>
@@ -11,7 +11,7 @@ export default class DSPUpdateEvent
   public async execute(
     queue: GuildQueue<PlayerMetadata>,
     _oldFilters: string[],
-    newFilters: string[]
+    newFilters: string[],
   ) {
     const guildId = queue.guild.id;
     const db = useDatabase();
@@ -20,7 +20,7 @@ export default class DSPUpdateEvent
       .findOneAndUpdate(
         { id: guildId },
         { id: guildId, filters: newFilters },
-        { upsert: true, new: true }
+        { upsert: true, new: true },
       )
       .catch(() => null);
   }

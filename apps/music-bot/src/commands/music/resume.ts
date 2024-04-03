@@ -1,10 +1,10 @@
-import { EmbedGenerator } from '#bot/utils/EmbedGenerator';
-import type { CommandData, SlashCommandProps } from 'commandkit';
-import { useTimeline } from 'discord-player';
+import { EmbedGenerator } from "#bot/utils/EmbedGenerator";
+import type { CommandData, SlashCommandProps } from "commandkit";
+import { useTimeline } from "discord-player";
 
 export const data: CommandData = {
-  name: 'resume',
-  description: 'Resume the current song',
+  name: "resume",
+  description: "Resume the current song",
 };
 
 export async function run({ interaction }: SlashCommandProps) {
@@ -16,8 +16,8 @@ export async function run({ interaction }: SlashCommandProps) {
 
   if (!timeline?.track) {
     const embed = EmbedGenerator.Error({
-      title: 'Not playing',
-      description: 'No track is playing right now',
+      title: "Not playing",
+      description: "No track is playing right now",
     }).withAuthor(interaction.user);
 
     return interaction.editReply({ embeds: [embed] });
@@ -25,8 +25,8 @@ export async function run({ interaction }: SlashCommandProps) {
 
   if (!timeline.paused) {
     const embed = EmbedGenerator.Error({
-      title: 'Error',
-      description: 'The track is not paused',
+      title: "Error",
+      description: "The track is not paused",
     }).withAuthor(interaction.user);
 
     return interaction.editReply({ embeds: [embed] });
@@ -35,8 +35,8 @@ export async function run({ interaction }: SlashCommandProps) {
   timeline.resume();
 
   const embed = EmbedGenerator.Success({
-    title: 'Resumed',
-    description: 'Successfully resumed the track.',
+    title: "Resumed",
+    description: "Successfully resumed the track.",
   }).withAuthor(interaction.user);
 
   return interaction.editReply({ embeds: [embed] });

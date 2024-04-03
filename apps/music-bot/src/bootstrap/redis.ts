@@ -1,6 +1,6 @@
-import { Redis } from 'ioredis';
-import { HooksRegistry, Symbols } from '#bot/hooks/registry';
-import { RedisConfig } from '#bot/utils/constants';
+import { Redis } from "ioredis";
+import { HooksRegistry, Symbols } from "#bot/hooks/registry";
+import { RedisConfig } from "#bot/utils/constants";
 
 const redis = new Redis({
   ...RedisConfig,
@@ -9,7 +9,7 @@ const redis = new Redis({
 
 await redis.connect();
 
-console.log('Connected to Redis');
+console.log("Connected to Redis");
 
 HooksRegistry.set(Symbols.kRedis, redis);
 

@@ -1,4 +1,4 @@
-import { useDatabase } from '#bot/hooks/useDatabase';
+import { useDatabase } from "#bot/hooks/useDatabase";
 
 export async function fetchPlayerOptions(guild: string) {
   const mongoose = useDatabase();

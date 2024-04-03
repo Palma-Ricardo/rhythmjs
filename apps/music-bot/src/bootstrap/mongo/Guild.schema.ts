@@ -1,4 +1,4 @@
-import { Schema, SchemaTypes, model } from 'mongoose';
+import { Schema, SchemaTypes, model } from "mongoose";
 
 export interface IGuildSchema {
   id: string;
@@ -40,7 +40,7 @@ export const GuildSchema = new Schema<IGuildSchema>(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
-export const GuildModel = model<IGuildSchema>('Guild', GuildSchema);
+export const GuildModel = model<IGuildSchema>("Guild", GuildSchema);

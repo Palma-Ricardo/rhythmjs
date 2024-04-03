@@ -1,12 +1,12 @@
-import { Client } from 'discord.js';
-import { HooksRegistry, Symbols } from '#bot/hooks/registry';
+import { Client } from "discord.js";
+import { HooksRegistry, Symbols } from "#bot/hooks/registry";
 import {
   ClientIntents,
   CommandsPath,
   EventsPath,
   ValidationsPath,
-} from '#bot/utils/constants';
-import { CommandKit } from 'commandkit';
+} from "#bot/utils/constants";
+import { CommandKit } from "commandkit";
 
 const client = new Client({
   intents: ClientIntents,

@@ -1,4 +1,4 @@
-import { app } from '#bot/web/index';
+import { app } from "#bot/web/index";
 
 const PORT = Number(process.env.PORT);
 

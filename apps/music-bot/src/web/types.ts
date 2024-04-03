@@ -2,10 +2,10 @@ import type {
   PlayerTimestamp,
   SerializedPlaylist,
   SerializedTrack,
-} from 'discord-player';
+} from "discord-player";
 
-import { QueueRepeatMode } from 'discord-player';
-import { EqualizerBand } from './actions/equalizer.action.js';
+import { QueueRepeatMode } from "discord-player";
+import { EqualizerBand } from "./actions/equalizer.action.js";
 
 export type SocketUser = {
   id: string;

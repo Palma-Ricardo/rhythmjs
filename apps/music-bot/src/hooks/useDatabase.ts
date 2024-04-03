@@ -1,5 +1,5 @@
-import { HooksRegistry, Symbols } from './registry.js';
-import { MongoDatabase } from '#bot/bootstrap/database';
+import { HooksRegistry, Symbols } from "./registry.js";
+import { MongoDatabase } from "#bot/bootstrap/database";
 
 export function useDatabase() {
   const mongoose = HooksRegistry.get(Symbols.kDatabase) as
@@ -7,7 +7,7 @@ export function useDatabase() {
     | undefined;
 
   if (!mongoose) {
-    throw new Error('Mongoose has not been initialized');
+    throw new Error("Mongoose has not been initialized");
   }
 
   return mongoose;

@@ -1,17 +1,17 @@
-import { useRedis } from '#bot/hooks/useRedis';
-import { useMainPlayer } from 'discord-player';
-import { Interaction } from 'discord.js';
+import { useRedis } from "#bot/hooks/useRedis";
+import { useMainPlayer } from "discord-player";
+import { Interaction } from "discord.js";
 
 export default async function interactionCreate(interaction: Interaction) {
-  if (!interaction.isAutocomplete() || interaction.commandName !== 'play')
+  if (!interaction.isAutocomplete() || interaction.commandName !== "play")
     return;
-  const query = interaction.options.getString('query', true);
+  const query = interaction.options.getString("query", true);
 
   if (!query.length) return interaction.respond([]);
 
   try {
     // autocomplete custom playlists from cache
-    if (query.startsWith('playlist:')) {
+    if (query.startsWith("playlist:")) {
       const redis = useRedis();
 
       try {

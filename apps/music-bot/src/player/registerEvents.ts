@@ -1,8 +1,8 @@
-import { type GuildQueueEvents, useMainPlayer } from 'discord-player';
-import { readdir } from 'node:fs/promises';
-import { join } from 'node:path';
-import { PlayerEventsPath } from '#bot/utils/constants';
-import type { Constructable, PlayerEvent } from './common/types.js';
+import { type GuildQueueEvents, useMainPlayer } from "discord-player";
+import { readdir } from "node:fs/promises";
+import { join } from "node:path";
+import { PlayerEventsPath } from "#bot/utils/constants";
+import type { Constructable, PlayerEvent } from "./common/types.js";
 
 export async function registerPlayerEvents() {
   const files = await readdir(PlayerEventsPath);

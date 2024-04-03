@@ -1,10 +1,10 @@
-import { EmbedGenerator } from '#bot/utils/EmbedGenerator';
-import type { CommandData, SlashCommandProps } from 'commandkit';
-import { useQueue, useTimeline } from 'discord-player';
+import { EmbedGenerator } from "#bot/utils/EmbedGenerator";
+import type { CommandData, SlashCommandProps } from "commandkit";
+import { useQueue, useTimeline } from "discord-player";
 
 export const data: CommandData = {
-  name: 'skip',
-  description: 'Skip to the next track',
+  name: "skip",
+  description: "Skip to the next track",
 };
 
 export async function run({ interaction }: SlashCommandProps) {
@@ -16,8 +16,8 @@ export async function run({ interaction }: SlashCommandProps) {
 
   if (!queue?.isPlaying()) {
     const embed = EmbedGenerator.Error({
-      title: 'Not playing',
-      description: 'No track is playing right now',
+      title: "Not playing",
+      description: "No track is playing right now",
     }).withAuthor(interaction.user);
 
     return interaction.editReply({ embeds: [embed] });
@@ -26,8 +26,8 @@ export async function run({ interaction }: SlashCommandProps) {
   queue.node.skip();
 
   const embed = EmbedGenerator.Success({
-    title: 'Track skipped!',
-    description: 'Successfully skipped to the next track.',
+    title: "Track skipped!",
+    description: "Successfully skipped to the next track.",
   }).withAuthor(interaction.user);
 
   return interaction.editReply({ embeds: [embed] });

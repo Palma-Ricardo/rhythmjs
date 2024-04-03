@@ -1,8 +1,8 @@
-import { useQueue } from 'discord-player';
-import { SocketUser } from '../socket.js';
-import type { Socket } from 'socket.io';
-import { PlayerMetadata } from '#bot/player/PlayerMetadata';
-import { EmbedGenerator } from '#bot/utils/EmbedGenerator';
+import { useQueue } from "discord-player";
+import { SocketUser } from "../socket.js";
+import type { Socket } from "socket.io";
+import { PlayerMetadata } from "#bot/player/PlayerMetadata";
+import { EmbedGenerator } from "#bot/utils/EmbedGenerator";
 
 export type EqualizerBand = {
   band: number;
@@ -12,7 +12,7 @@ export type EqualizerBand = {
 export async function EqualizerAction(
   info: SocketUser,
   socket: Socket,
-  eq: EqualizerBand[]
+  eq: EqualizerBand[],
 ) {
   const queue = useQueue<PlayerMetadata>(info.guildId);
   if (!queue?.connection) return socket.disconnect(true);
@@ -29,7 +29,7 @@ export async function EqualizerAction(
   await queue.metadata.channel.send({
     embeds: [
       EmbedGenerator.Success({
-        title: 'Equalizer updated!',
+        title: "Equalizer updated!",
         description: `The equalizer was updated by ${info.displayName} (<@${info.id}>).`,
       }),
     ],

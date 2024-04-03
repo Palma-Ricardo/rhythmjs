@@ -10,8 +10,8 @@ import {
   SerializedTrack,
   SerializedPlaylist,
   Playlist,
-} from 'discord-player';
-import type { Redis } from 'ioredis';
+} from "discord-player";
+import type { Redis } from "ioredis";
 
 export class RedisQueryCache implements QueryCacheProvider<Track> {
   public EXPIRY_TIMEOUT = 3600 * 5;
@@ -26,7 +26,7 @@ export class RedisQueryCache implements QueryCacheProvider<Track> {
     const serialized = JSON.stringify(
       data.playlist
         ? serialize(data.playlist)
-        : data.tracks.map((track) => serialize(track))
+        : data.tracks.map((track) => serialize(track)),
     );
 
     await this.redis.setex(key, this.EXPIRY_TIMEOUT, serialized);
@@ -37,7 +37,7 @@ export class RedisQueryCache implements QueryCacheProvider<Track> {
   > {
     const player = useMainPlayer();
 
-    const data = await this.redis.keys(this.createKey('*'));
+    const data = await this.redis.keys(this.createKey("*"));
 
     const serialized = await this.redis.mget(data);
 
@@ -46,14 +46,14 @@ export class RedisQueryCache implements QueryCacheProvider<Track> {
       .map((item) => deserialize(player, JSON.parse(item!))) as Track[];
 
     const res = parsed.map(
-      (item) => new DiscordPlayerQueryResultCache(item, 0)
+      (item) => new DiscordPlayerQueryResultCache(item, 0),
     );
 
     return res;
   }
 
   public async resolve(
-    context: QueryCacheResolverContext
+    context: QueryCacheResolverContext,
   ): Promise<SearchResult> {
     const player = useMainPlayer();
 
@@ -61,7 +61,7 @@ export class RedisQueryCache implements QueryCacheProvider<Track> {
       const key = this.createKey(context.query);
 
       const serialized = await this.redis.get(key);
-      if (!serialized) throw new Error('No data found');
+      if (!serialized) throw new Error("No data found");
 
       const raw = JSON.parse(serialized) as
         | SerializedTrack[]

@@ -1,10 +1,10 @@
-import { EmbedGenerator } from '#bot/utils/EmbedGenerator';
-import type { CommandData, SlashCommandProps } from 'commandkit';
-import { usePlayer, useTimeline } from 'discord-player';
+import { EmbedGenerator } from "#bot/utils/EmbedGenerator";
+import type { CommandData, SlashCommandProps } from "commandkit";
+import { usePlayer, useTimeline } from "discord-player";
 
 export const data: CommandData = {
-  name: 'nowplaying',
-  description: 'View the currently playing song',
+  name: "nowplaying",
+  description: "View the currently playing song",
 };
 
 export async function run({ interaction }: SlashCommandProps) {
@@ -18,8 +18,8 @@ export async function run({ interaction }: SlashCommandProps) {
   // this will also verify if usePlayer's value is null
   if (!timeline?.track) {
     const embed = EmbedGenerator.Error({
-      title: 'Not playing',
-      description: 'No track is playing right now',
+      title: "Not playing",
+      description: "No track is playing right now",
     }).withAuthor(interaction.user);
 
     return interaction.editReply({ embeds: [embed] });
@@ -28,9 +28,9 @@ export async function run({ interaction }: SlashCommandProps) {
   const { track, timestamp } = timeline;
 
   const embed = EmbedGenerator.Info({
-    title: 'Now Playing',
+    title: "Now Playing",
     description: `[${track.title}](${track.url})`,
-    fields: [{ name: 'Progress', value: node.createProgressBar()! }],
+    fields: [{ name: "Progress", value: node.createProgressBar()! }],
     thumbnail: { url: track.thumbnail },
     footer: {
       text: `Requested by ${track.requestedBy?.tag} • ${timestamp.progress}%`,

@@ -1,4 +1,4 @@
-import { useDatabase } from '#bot/hooks/useDatabase';
+import { useDatabase } from "#bot/hooks/useDatabase";
 import {
   BaseExtractor,
   ExtractorInfo,
@@ -7,16 +7,16 @@ import {
   SerializedTrack,
   Track,
   deserialize,
-} from 'discord-player';
-import type { MongoDatabase } from '#bot/bootstrap/database';
+} from "discord-player";
+import type { MongoDatabase } from "#bot/bootstrap/database";
 
 export class CustomPlaylistExtractor extends BaseExtractor {
   private db: MongoDatabase | null = null;
-  public static identifier = 'custom-playlist-extractor' as const;
+  public static identifier = "custom-playlist-extractor" as const;
 
   public async activate() {
     this.db = useDatabase();
-    this.protocols = ['playlist'];
+    this.protocols = ["playlist"];
   }
 
   public async deactivate(): Promise<void> {
@@ -26,12 +26,12 @@ export class CustomPlaylistExtractor extends BaseExtractor {
 
   public async validate(
     query: string,
-    type?: SearchQueryType | null | undefined
+    type?: SearchQueryType | null | undefined,
   ): Promise<boolean> {
     const regex = new RegExp(
       `/^(${this.protocols.join(
-        '|'
-      )}:)?[a-f0-9]{8}-([a-f0-9]{4}-){3}[a-f0-9]{12}$/`
+        "|",
+      )}:)?[a-f0-9]{8}-([a-f0-9]{4}-){3}[a-f0-9]{12}$/`,
     );
 
     return regex.test(query);
@@ -39,12 +39,12 @@ export class CustomPlaylistExtractor extends BaseExtractor {
 
   public async handle(
     query: string,
-    context: ExtractorSearchContext
+    context: ExtractorSearchContext,
   ): Promise<ExtractorInfo> {
     if (!this.db) return this.createResponse();
 
-    const id = query.startsWith('playlist:')
-      ? query.split('playlist:')[1]
+    const id = query.startsWith("playlist:")
+      ? query.split("playlist:")[1]
       : query;
     const result = await this.db.playlist.findOne({
       id,
@@ -61,22 +61,22 @@ export class CustomPlaylistExtractor extends BaseExtractor {
         name:
           this.context.player.client.users.resolve(result.author)
             ?.displayName ?? result.author,
-        url: '',
+        url: "",
       },
-      description: '',
+      description: "",
       id: result.id,
-      source: 'arbitrary',
-      thumbnail: '',
+      source: "arbitrary",
+      thumbnail: "",
       title: result.name,
       tracks: [],
-      type: 'playlist',
-      url: '',
+      type: "playlist",
+      url: "",
     });
 
     const tracks = result.tracks.map((track) => {
       const song = deserialize(
         this.context.player,
-        track as SerializedTrack
+        track as SerializedTrack,
       ) as Track<unknown>;
 
       song.playlist = playlist;

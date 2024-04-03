@@ -1,10 +1,10 @@
-import { EmbedGenerator } from '#bot/utils/EmbedGenerator';
-import type { CommandData, SlashCommandProps } from 'commandkit';
-import { useQueue } from 'discord-player';
+import { EmbedGenerator } from "#bot/utils/EmbedGenerator";
+import type { CommandData, SlashCommandProps } from "commandkit";
+import { useQueue } from "discord-player";
 
 export const data: CommandData = {
-  name: 'stop',
-  description: 'Stop the player',
+  name: "stop",
+  description: "Stop the player",
 };
 
 export async function run({ interaction }: SlashCommandProps) {
@@ -16,8 +16,8 @@ export async function run({ interaction }: SlashCommandProps) {
 
   if (!queue?.isPlaying()) {
     const embed = EmbedGenerator.Error({
-      title: 'Not playing',
-      description: 'No track is playing right now',
+      title: "Not playing",
+      description: "No track is playing right now",
     }).withAuthor(interaction.user);
 
     return interaction.editReply({ embeds: [embed] });
@@ -26,8 +26,8 @@ export async function run({ interaction }: SlashCommandProps) {
   queue.node.stop();
 
   const embed = EmbedGenerator.Success({
-    title: 'Track stopped!',
-    description: 'Successfully stopped the track.',
+    title: "Track stopped!",
+    description: "Successfully stopped the track.",
   }).withAuthor(interaction.user);
 
   return interaction.editReply({ embeds: [embed] });

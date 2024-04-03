@@ -1,14 +1,14 @@
-import { QueueRepeatMode, useMainPlayer, useQueue } from 'discord-player';
-import { SocketUser } from '../socket.js';
-import type { Socket } from 'socket.io';
-import { PlayerMetadata } from '#bot/player/PlayerMetadata';
-import { EmbedGenerator } from '#bot/utils/EmbedGenerator';
-import { fetchPlayerOptions } from '#bot/player/playerOptions';
+import { QueueRepeatMode, useMainPlayer, useQueue } from "discord-player";
+import { SocketUser } from "../socket.js";
+import type { Socket } from "socket.io";
+import { PlayerMetadata } from "#bot/player/PlayerMetadata";
+import { EmbedGenerator } from "#bot/utils/EmbedGenerator";
+import { fetchPlayerOptions } from "#bot/player/playerOptions";
 
 export async function PlayAction(
   info: SocketUser,
   socket: Socket,
-  query: string
+  query: string,
 ) {
   const player = useMainPlayer();
   const guild = player.client.guilds.cache.get(info.guildId);
@@ -30,7 +30,7 @@ export async function PlayAction(
         repeatMode: QueueRepeatMode[
           playerOptions.loopMode
         ] as unknown as QueueRepeatMode,
-        a_filter: playerOptions.filters as ('8D' | 'Tremolo' | 'Vibrato')[],
+        a_filter: playerOptions.filters as ("8D" | "Tremolo" | "Vibrato")[],
         equalizer: playerOptions.equalizer.map((eq, i) => ({
           band: i,
           gain: eq,
@@ -48,7 +48,7 @@ export async function PlayAction(
 
       await queue.connect(channel);
     } catch {
-      socket.emit('error', 'Failed to join your voice channel.');
+      socket.emit("error", "Failed to join your voice channel.");
       return socket.disconnect(true);
     }
   }
@@ -62,10 +62,10 @@ export async function PlayAction(
       embeds: [
         EmbedGenerator.Success({
           title: `${
-            result.searchResult.hasPlaylist() ? 'Playlist' : 'Track'
+            result.searchResult.hasPlaylist() ? "Playlist" : "Track"
           } queued!`,
           description: `The ${
-            result.searchResult.hasPlaylist() ? 'playlist' : 'track'
+            result.searchResult.hasPlaylist() ? "playlist" : "track"
           } **${
             result.searchResult.playlist?.title ||
             result.searchResult.tracks[0].title
@@ -74,11 +74,11 @@ export async function PlayAction(
       ],
     });
 
-    return socket.emit('queued', {
+    return socket.emit("queued", {
       playlist: result.searchResult.hasPlaylist(),
       data: (result.searchResult.playlist || result.track).serialize(),
     });
   } catch {
-    return socket.emit('error', 'Failed to play that track.');
+    return socket.emit("error", "Failed to play that track.");
   }
 }

@@ -1,6 +1,6 @@
-import { useDatabase } from '#bot/hooks/useDatabase';
-import { useRedis } from '#bot/hooks/useRedis';
-import { Client } from 'discord.js';
+import { useDatabase } from "#bot/hooks/useDatabase";
+import { useRedis } from "#bot/hooks/useRedis";
+import { Client } from "discord.js";
 
 export default async function loadCustomPlaylistsCache(client: Client<true>) {
   const db = useDatabase();
@@ -30,9 +30,9 @@ export default async function loadCustomPlaylistsCache(client: Client<true>) {
           author: user,
           url: `playlist:${list.id}`,
           trackCount: list.tracks.length,
-        })
+        }),
       );
-    })
+    }),
   );
 
   await redis.mset(resolvedList);
