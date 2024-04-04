@@ -45,7 +45,7 @@ export const DiscordPlayerOptions: DiscordPlayerConfig = {
     ReverbnationExtractor: {},
     AttachmentExtractor: {},
   },
-  disableSources: [],
+  disableSources: ['SpotifyExtractor'],
 };
 
 type DiscordPlayerConfig = {
