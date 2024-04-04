@@ -1,19 +1,21 @@
 {
-  "private": true,
+  "name": "rhythmjs",
+  "version": "1.0.0",
+  "description": "A Discord music bot, rewritten from my previous Python implementation, ([seen here](https://github.com/Palma-Ricardo/KoolCidsMusicBot)).",
+  "main": "index.js",
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "bot": "pnpm run --filter music-bot"
+    "start": "node src/index.js",
+    "deploy": "node src/deploy-commands.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "devDependencies": {
-    "eslint": "^8.48.0",
-    "prettier": "^3.0.3",
-    "tsconfig": "workspace:*",
-    "turbo": "latest",
-    "typescript": "^5.2.2"
-  },
-  "packageManager": "pnpm@8.6.10",
-  "name": "music-bot"
+  "author": "Ricardo Palma",
+  "license": "ISC",
+  "dependencies": {
+    "@discord-player/extractor": "^4.4.7",
+    "discord-player": "^6.6.8",
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.4.5",
+    "mediaplex": "^0.0.9",
+    "youtube-ext": "^1.1.16"
+  }
 }
